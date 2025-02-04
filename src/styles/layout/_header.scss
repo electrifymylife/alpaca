@@ -231,6 +231,7 @@
   font-size: abstracts.$font-size-menu-main;
   font-weight: abstracts.$font-weight-regular;
   line-height: abstracts.$line-height-menu-main;
+
   @include transition-color;
 
   @media (max-width: abstracts.$bp-middle) {
