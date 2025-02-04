@@ -5,60 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Alpaca menu</title>
+    <link
+      rel="preload"
+      href="./src/assets/fonts/roboto.woff2"
+      type="font/woff2"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="./src/assets/fonts/robotomedium.woff"
+      type="font/woff2"
+      as="font"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./src/styles/main.scss" />
-    <script src="src/script/main.js" defer></script>
+    <script src="./src/script/main.js" defer></script>
   </head>
   <body>
     <header class="header">
       <div class="container">
         <div class="header__wrapper">
           <img src="./src/assets/img/logo.svg" width="46" height="46" alt="h.M - company logo" />
-          <ul class="header__nav">
-            <li class="header__nav-item">
-              <a href="/" class="header__nav-link">Главная</a>
-            </li>
-            <li class="header__nav-item header__nav-item--parent">
-              <a href="#" class="header__nav-link">Основное меню</a>
-              <div class="header__nav-inner-wrapper">
-                <ul class="header__nav-inner">
-                  <li class="header__nav-inner-item header__nav-item--squared">
-                    <a href="#" class="header__nav-inner-link">Заказать вёрстку</a>
-                  </li>
-                  <li class="header__nav-inner-item">
-                    <a href="#" class="header__nav-inner-link">Отправить макет на проверку</a>
-                  </li>
-                  <li class="header__nav-inner-item">
-                    <a href="#" class="header__nav-inner-link">Хочу работать у вас</a>
-                  </li>
-                  <li class="header__nav-inner-item header__nav-inner-item--parent">
-                    <a href="#" class="header__nav-inner-link">
-                      Есть предложение по работе с клиентами</a
-                    >
-                    <div class="header__nav-inner-wrapper">
-                      <ul class="header__nav-inner">
-                        <li class="header__nav-inner-item">
-                          <a href="#" class="header__nav-inner-link">У меня есть оффер</a>
-                        </li>
-                        <li class="header__nav-inner-item">
-                          <a href="#" class="header__nav-inner-link">Сделать партнёром</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="#" class="header__nav-link">Наши сервисы</a>
-            </li>
-            <li>
-              <a href="#" class="header__nav-link">Контакты</a>
-            </li>
-          </ul>
-          <a href="tel:+13212223333" class="header__phone">+1 (321) 222 - 33 - 33</a>
+          <nav class="header__nav">
+            <ul class="header__nav-list">
+              <li class="header__nav-item">
+                <a class="header__nav-link" href="/">
+                  <p class="header__nav-item-text">Главная</p>
+                </a>
+              </li>
+              <li class="header__nav-item header__nav-item--parent">
+                <a class="header__nav-link" href="#">
+                  <p class="header__nav-item-text header__nav-item-text--parent">Основное меню</p>
+                </a>
+                <div class="header__nav-inner-wrapper">
+                  <ul class="header__nav-inner">
+                    <li class="header__nav-inner-item header__nav-item--squared">
+                      <a class="header__nav-inner-link" href="#">
+                        <p class="header__nav-item-text">Заказать вёрстку</p>
+                      </a>
+                    </li>
+                    <li class="header__nav-inner-item">
+                      <a class="header__nav-inner-link" href="#">
+                        <p class="header__nav-item-text">Отправить макет на проверку</p>
+                      </a>
+                    </li>
+                    <li class="header__nav-inner-item">
+                      <a class="header__nav-inner-link" href="#">
+                        <p class="header__nav-item-text">Хочу работать у вас</p>
+                      </a>
+                    </li>
+                    <li class="header__nav-inner-item header__nav-inner-item--parent">
+                      <a class="header__nav-inner-link" href="#">
+                        <p class="header__nav-item-text header__nav-item-text--parent">
+                          Есть предложение по работе с клиентами
+                        </p>
+                      </a>
+                      <div class="header__nav-inner-wrapper">
+                        <ul class="header__nav-inner">
+                          <li class="header__nav-inner-item">
+                            <a class="header__nav-inner-link" href="#">
+                              <p class="header__nav-item-text">У меня есть оффер</p>
+                            </a>
+                          </li>
+                          <li class="header__nav-inner-item">
+                            <a class="header__nav-inner-link" href="#">
+                              <p class="header__nav-item-text">Сделать партнёром</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="header__nav-item">
+                <a class="header__nav-link" href="#">
+                  <p class="header__nav-item-text">Наши сервисы</p>
+                </a>
+              </li>
+              <li class="header__nav-item">
+                <a class="header__nav-link" href="#">
+                  <p class="header__nav-item-text">Контакты</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <a class="header__phone" href="tel:+13212223333">+1 (321) 222 - 33 - 33</a>
+          <button class="header__burger" type="button">
+            <span class="visually-hidden">Открыть или закрыть меню</span>
+          </button>
         </div>
       </div>
     </header>
-    <main class="main"></main>
+    <main class="main">
+      <h1 class="visually-hidden">Alpaca menu</h1>
+    </main>
   </body>
 </html>

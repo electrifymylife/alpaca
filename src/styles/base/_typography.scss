@@ -1,6 +1,8 @@
+@use "../abstracts";
+
 body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
+  font-family: abstracts.$font-family-main;
+  font-size: abstracts.$font-size-main;
+  font-weight: abstracts.$font-weight-regular;
+  line-height: abstracts.$line-height-main;
 }

@@ -1,11 +1,11 @@
 @use "../abstracts";
 
 .container {
-  max-width: abstracts.$max-width;
+  max-width: abstracts.$container-max-width;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: abstracts.$container-padding;
+  padding-right: abstracts.$container-padding;
   width: 100%;
 }
 

@@ -5,9 +5,9 @@ html {
 }
 
 body {
+  min-height: 100dvh;
   color: abstracts.$color-main;
   background-color: abstracts.$color-main-bg;
-  min-height: 100dvh;
 }
 
 h1,

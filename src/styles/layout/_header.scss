@@ -1,5 +1,21 @@
 @use "../abstracts";
-@use "sass:map";
+
+@mixin show-el {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+@mixin pseudo-triangle {
+  position: absolute;
+  content: "";
+  background-image: url('data:image/svg+xml,<svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.46411 6L0.464111 0H8.46411L4.46411 6Z" fill="%23F2994A"/></svg>');
+  background-repeat: no-repeat;
+  transition: all 0.35s ease-out;
+  width: 9px;
+  height: 6px;
+  top: calc(50% - 6px / 2);
+}
 
 .header {
   position: relative;
@@ -16,6 +32,47 @@
 }
 
 .header__nav {
+  @media (max-width: abstracts.$bp-middle) {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}
+
+.header__nav--active {
+  @include show-el;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: calc(100dvh - 80px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden scroll;
+  background: abstracts.$color-main-bg;
+  z-index: 1;
+  transition: 0.3s;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: abstracts.$color-main-bg;
+  }
+
+  @media (max-width: abstracts.$bp-small) {
+    width: 100%;
+  }
+}
+
+.header__nav-list {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,52 +87,116 @@
 
 .header__nav-item {
   display: flex;
+  flex-direction: column;
+
+  @media (max-width: abstracts.$bp-middle) {
+    width: 100%;
+  }
 }
 
 .header__nav-inner-wrapper {
-  opacity: 0;
-  visibility: hidden;
   position: absolute;
   padding-top: 20px;
-  transition: opacity 0.4s ease-out;
+  opacity: 0;
+  visibility: hidden;
 
-  &:before {
+  @media (min-width: abstracts.$bp-middle) {
+    transition: all 0.5s ease;
+  }
+
+  @media (max-width: abstracts.$bp-middle) {
+    padding-top: 0;
+  }
+
+  &::before {
     position: absolute;
     content: "";
     background-image: url('data:image/svg+xml,<svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 0L28 14H0L14 0Z" fill="%23252830"/></svg>');
     width: 28px;
     height: 14px;
+
+    @media (max-width: abstracts.$bp-middle) {
+      display: none;
+    }
+  }
+}
+
+.header__nav-inner-wrapper--active {
+  @include show-el;
+  position: static;
+  transition: unset;
+  animation: growDown 500ms ease-in-out forwards;
+  transform-origin: top center;
+
+  @keyframes growDown {
+    0% {
+      transform: scaleY(0);
+    }
+
+    80% {
+      transform: scaleY(1.1);
+    }
+
+    100% {
+      transform: scaleY(1);
+    }
   }
 }
 
 .header__nav-inner {
+  max-width: 320px;
+  width: fit-content;
   background-color: abstracts.$color-menu-inner-bg;
   border-radius: 8px;
-  width: fit-content;
-  max-width: 320px;
+
+  @media (max-width: abstracts.$bp-middle) {
+    max-width: unset;
+    width: 100%;
+    border-radius: 0;
+  }
 
   &:has(.header__nav-item--squared) {
     border-radius: 0 0 8px 8px;
+
+    @media (max-width: abstracts.$bp-middle) {
+      border-radius: 0;
+    }
   }
 }
 
 .header__nav-inner-item {
   display: flex;
-  white-space: nowrap;
+  flex-direction: column;
+
+  @media (max-width: abstracts.$bp-middle) {
+    width: 100%;
+  }
 
   &:first-child:not(.header__nav-item--squared) {
     border-radius: 8px 8px 0 0;
+
+    @media (max-width: abstracts.$bp-middle) {
+      border-radius: 0;
+    }
   }
 
   &:last-child {
     border-radius: 0 0 8px 8px;
+
+    @media (max-width: abstracts.$bp-middle) {
+      border-radius: 0;
+    }
   }
 
   &:not(:last-child) {
     border-bottom: 1px solid rgba(abstracts.$color-main, 0.1);
+
+    @media (max-width: abstracts.$bp-middle) {
+      border-bottom: 0;
+    }
   }
 
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
     &:hover,
     &:focus {
       background-color: abstracts.$color-main-bg;
@@ -88,15 +209,25 @@
   display: inline-block;
   padding: 8px 18px;
   width: 100%;
+
+  @media (max-width: abstracts.$bp-middle) {
+    padding: 20px;
+  }
 }
 
 .header__nav-link {
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: abstracts.$font-size-menu-main;
+  font-weight: abstracts.$font-weight-regular;
+  line-height: abstracts.$line-height-menu-main;
   transition: color 0.3s ease-out;
 
-  @media (hover: hover) and (pointer: fine) {
+  @media (max-width: abstracts.$bp-middle) {
+    background-color: abstracts.$color-menu-inner-bg;
+    border-bottom: 1px solid abstracts.$color-main-bg;
+    padding: 20px;
+  }
+
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
     &:hover,
     &:focus {
       color: abstracts.$color-menu-hover;
@@ -104,58 +235,86 @@
   }
 }
 
+.header__nav-link--expanded {
+  background-color: abstracts.$color-main-bg;
+
+  & .header__nav-item-text--parent::after {
+    transform: rotate(-180deg);
+  }
+}
+
 .header__nav-inner-link {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  @media (max-width: abstracts.$bp-middle) {
+    border-bottom: 1px solid abstracts.$color-main-bg;
+  }
+}
+
+.header__nav-item-text {
+  position: relative;
+
+  @media (min-width: abstracts.$bp-middle) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.header__nav-item-text--parent {
+  @media (max-width: abstracts.$bp-middle) {
+    width: fit-content;
+    padding-right: calc(9px + 9px);
+
+    &::after {
+      @include pseudo-triangle;
+      right: 0;
+    }
+  }
 }
 
 .header__nav-item--parent,
 .header__nav-inner-item--parent {
   position: relative;
-  &:after {
-    position: absolute;
-    content: "";
-    background-image: url('data:image/svg+xml,<svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.46411 6L0.464111 0H8.46411L4.46411 6Z" fill="%23F2994A"/></svg>');
-    background-repeat: no-repeat;
-    transition: all 0.35s ease-out;
-    width: 9px;
-    height: 6px;
-    top: calc(50% - 6px / 2);
+
+  &::after {
+    @include pseudo-triangle;
+
+    @media (max-width: abstracts.$bp-middle) {
+      display: none;
+    }
   }
 
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
     &:hover,
     &:focus {
       & > .header__nav-inner-wrapper {
-        opacity: 1;
-        visibility: visible;
+        @include show-el;
       }
     }
   }
 }
 
 .header__nav-item--parent {
-  &:after {
+  &::after {
     right: 0;
   }
 
   & > .header__nav-inner-wrapper {
     top: 100%;
-    &:before {
+
+    &::before {
       top: 6px;
       left: 47px;
     }
   }
 
-  @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
     &:hover,
     &:focus {
-      &:after {
+      &::after {
         transform: rotate(-180deg);
       }
 
-      & .header__nav-inner-item--parent:after {
+      & .header__nav-inner-item--parent::after {
         display: block;
       }
     }
@@ -163,13 +322,17 @@
 }
 
 .header__nav-inner-item--parent {
-  &:after {
+  &::after {
     display: none;
     right: 18px;
   }
 
   & > .header__nav-inner-link {
     padding: 8px calc(18px + 9px + 9px) 8px 18px;
+
+    @media (max-width: abstracts.$bp-middle) {
+      padding: 20px;
+    }
   }
 
   & > .header__nav-inner-wrapper {
@@ -177,16 +340,20 @@
     left: 100%;
     padding-left: 22px;
 
-    &:before {
-      left: 1px;
+    @media (max-width: abstracts.$bp-middle) {
+      padding-left: 0;
+    }
+
+    &::before {
+      left: 2px;
       bottom: 13px;
       transform: rotate(-90deg);
     }
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover:after,
-    &:focus:after {
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
+    &:hover::after,
+    &:focus::after {
       transform: rotate(-90deg);
     }
   }
@@ -194,15 +361,25 @@
 
 .header__phone {
   position: relative;
+  padding: 8px 8px 8px calc(8px + 24px + 10px);
+  font-size: abstracts.$font-size-menu-main;
+  line-height: abstracts.$line-height-menu-main;
+  font-weight: abstracts.$font-weight-medium;
   white-space: nowrap;
   color: abstracts.$color-main;
-  padding: 8px 8px 8px calc(8px + 24px + 10px);
 
-  @media (max-width: abstracts.$bp-large) and (min-width: abstracts.$bp-middle) {
+  @media (max-width: abstracts.$bp-small) or ((min-width: abstracts.$bp-middle + 1) and (max-width: abstracts.$bp-large)) {
+    padding: 0;
+    width: 40px;
+    height: 40px;
     font-size: 0;
   }
 
-  &:before {
+  @media (max-width: abstracts.$bp-small) {
+    margin-left: auto;
+  }
+
+  &::before {
     position: absolute;
     content: "";
     background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79C8.06 13.62 10.38 15.93 13.21 17.38L15.41 15.18C15.68 14.91 16.08 14.821 16.43 14.94C17.55 15.311 18.76 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.61 21 3 13.391 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z" fill="%235BC12C"/></svg>');
@@ -210,5 +387,64 @@
     height: 24px;
     top: calc(50% - 24px / 2);
     left: 8px;
+
+    @media (max-width: abstracts.$bp-small) {
+      left: calc(50% - 24px / 2);
+    }
+  }
+}
+
+.header__burger {
+  display: none;
+  width: 22px;
+  height: 14px;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "";
+    background-image: url('data:image/svg+xml,<svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1H22M0 7H22M0 13H22" stroke="%23F2994A" stroke-width="2"/></svg>');
+    width: 22px;
+    height: 14px;
+    top: calc(50% - 14px / 2);
+    left: calc(50% - 22px / 2);
+    transition:
+      top 0.3s 0.15s,
+      bottom 0.3s 0.15s;
+  }
+
+  @media (max-width: abstracts.$bp-middle) {
+    display: block;
+  }
+}
+
+.header__cross {
+  width: 22px;
+  height: 14px;
+  position: relative;
+  transition:
+    transform 0.2s ease-in,
+    top 0.2s ease-in,
+    color 0.2s ease-in;
+
+  &::before,
+  &::after {
+    display: inline-block;
+    position: absolute;
+    content: "";
+    background-color: abstracts.$color-btn-burger;
+    width: 22px;
+    height: 2px;
+    top: calc(50% - 2px / 2);
+    right: calc(50% - 22px / 2);
+    transition: transform 0.3s 0.15s;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
   }
 }

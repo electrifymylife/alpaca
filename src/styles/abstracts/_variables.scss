@@ -1,12 +1,13 @@
 // Container's maximum width
 
-$max-width: 1196px !default;
+$container-padding: 22px;
+$container-max-width: calc(1196px + $container-padding * 2);
 
 // Breakpoints
 
-$bp-small: 375px;
+$bp-small: 480px;
 $bp-middle: 768px;
-$bp-large: 1023px;
+$bp-large: 1100px;
 
 // Colors
 
@@ -16,3 +17,18 @@ $color-menu-inner-bg: #252830;
 $color-main: #ffffff;
 $color-menu: #fafafa;
 $color-menu-hover: #eb5757;
+
+$color-btn-burger: #f2994a;
+
+// Typography
+
+// --- main
+$font-family-main: "Roboto", sans-serif;
+$font-size-main: 16px;
+$line-height-main: 20px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+
+$font-size-menu-main: 18px;
+$line-height-menu-main: 24px;
