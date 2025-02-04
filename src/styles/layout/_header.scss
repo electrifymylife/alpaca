@@ -155,7 +155,7 @@
     border-radius: 0;
   }
 
-  &:has(.header__nav-item--squared) {
+  &:has(.header__nav-inner-item--squared) {
     border-radius: 0 0 8px 8px;
 
     @media (max-width: abstracts.$bp-middle) {
@@ -172,7 +172,7 @@
     width: 100%;
   }
 
-  &:first-child:not(.header__nav-item--squared) {
+  &:first-child:not(.header__nav-inner-item--squared) {
     border-radius: 8px 8px 0 0;
 
     @media (max-width: abstracts.$bp-middle) {
