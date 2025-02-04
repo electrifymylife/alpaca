@@ -28,17 +28,18 @@ burger.addEventListener("click", () => {
 });
 
 headerNav.addEventListener("click", (e) => {
-  e.preventDefault();
-  const targetLink = e.target.closest(".header__nav a");
+  const targetLink = e.target.closest(".header__nav button");
   if (!targetLink || !targetLink.nextElementSibling) return;
+  if (targetLink) e.preventDefault();
   const targetWrapper = targetLink.nextElementSibling;
-
-  if (targetLink.classList.contains("header__nav-link--expanded")) {
-    targetLink.classList.remove("header__nav-link--expanded");
-    targetWrapper.classList.remove("header__nav-inner-wrapper--active");
-  } else {
-    targetLink.classList.add("header__nav-link--expanded");
-    targetWrapper.classList.add("header__nav-inner-wrapper--active");
+  if (window.innerWidth <= 768) {
+    if (targetLink.classList.contains("header__nav-link--expanded")) {
+      targetLink.classList.remove("header__nav-link--expanded");
+      targetWrapper.classList.remove("header__nav-inner-wrapper--active");
+    } else {
+      targetLink.classList.add("header__nav-link--expanded");
+      targetWrapper.classList.add("header__nav-inner-wrapper--active");
+    }
   }
 });
 

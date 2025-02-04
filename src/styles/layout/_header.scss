@@ -17,6 +17,17 @@
   top: calc(50% - 6px / 2);
 }
 
+@mixin transition-color($color: abstracts.$color-menu-hover) {
+  transition: color 0.3s ease-out;
+
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
+    &:hover,
+    &:focus {
+      color: $color;
+    }
+  }
+}
+
 .header {
   position: relative;
   background-color: abstracts.$color-main-bg;
@@ -55,16 +66,16 @@
   overflow: hidden scroll;
   background: abstracts.$color-main-bg;
   z-index: 1;
-  transition: 0.3s;
+  transition: opacity 0.3s;
 
   &::-webkit-scrollbar {
-    width: 1px;
-    height: 1px;
+    width: 4px;
+    height: 4px;
     background-color: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: abstracts.$color-main-bg;
+    background-color: abstracts.$color-btn-burger;
   }
 
   @media (max-width: abstracts.$bp-small) {
@@ -180,7 +191,8 @@
     }
   }
 
-  &:last-child {
+  &:last-child,
+  &:last-child .header__nav-inner-link {
     border-radius: 0 0 8px 8px;
 
     @media (max-width: abstracts.$bp-middle) {
@@ -219,19 +231,12 @@
   font-size: abstracts.$font-size-menu-main;
   font-weight: abstracts.$font-weight-regular;
   line-height: abstracts.$line-height-menu-main;
-  transition: color 0.3s ease-out;
+  @include transition-color;
 
   @media (max-width: abstracts.$bp-middle) {
     background-color: abstracts.$color-menu-inner-bg;
     border-bottom: 1px solid abstracts.$color-main-bg;
     padding: 20px;
-  }
-
-  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
-    &:hover,
-    &:focus {
-      color: abstracts.$color-menu-hover;
-    }
   }
 }
 
@@ -251,6 +256,7 @@
 
 .header__nav-item-text {
   position: relative;
+  display: block;
 
   @media (min-width: abstracts.$bp-middle) {
     text-overflow: ellipsis;
@@ -348,6 +354,7 @@
       left: 2px;
       bottom: 13px;
       transform: rotate(-90deg);
+      z-index: -1;
     }
   }
 
@@ -377,6 +384,13 @@
 
   @media (max-width: abstracts.$bp-small) {
     margin-left: auto;
+  }
+
+  @media (hover: hover) and (pointer: fine) and (min-width: abstracts.$bp-middle) {
+    &:hover,
+    &:focus {
+      color: abstracts.$color-menu-hover;
+    }
   }
 
   &::before {
