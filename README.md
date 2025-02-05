@@ -30,5 +30,5 @@
 4. **Проверка соблюдения лучших практик scss линтером**
 
     ```shell
-    npx stylelint "**/*.scss"
+    npm run lint:scss
     ```
