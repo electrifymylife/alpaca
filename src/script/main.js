@@ -4,6 +4,9 @@ const body = document.querySelector("body");
 const main = document.querySelector("main");
 const burger = document.querySelector(".header__burger");
 const headerNav = document.querySelector(".header__nav");
+document.addEventListener("DOMContentLoaded", () => {
+  main.classList.add("main--bg-visible");
+});
 burger.addEventListener("click", () => {
   if (burger.classList.contains("header__burger")) {
     const overlay = document.createElement("div");

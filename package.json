@@ -14,7 +14,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint:html": "linthtml *.html --config .linthtmlrc.cjs"
+    "lint:html": "linthtml *.html --config .linthtmlrc.cjs",
+    "lint:scss": "npx stylelint \"**/*.scss\""
   },
   "keywords": [],
   "author": "",
